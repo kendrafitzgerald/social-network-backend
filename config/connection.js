@@ -1,10 +1,11 @@
-const mongoose = require('mongoose');
+const { connect, connection} = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1:27017/mygroceryDB', {
+const connectionString = 'mongodb://127.0.0.1:27017/socialDB'
+connect(connectionString, {
  useNewUrlParser: true,
  useUnifiedTopology: true,
 })
 
 
 
-module.exports = mongoose.connection;
+module.exports = connection
