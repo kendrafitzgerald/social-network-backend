@@ -11,8 +11,8 @@
 //TODO: add a new friend to user's friend list
 //done?
 //TODO: delete to remove a friend from a user's friend list
-
-const { User } = require("../models");
+//done?
+const { User} = require("../models");
 
 module.exports = {
   //get all users
@@ -34,7 +34,7 @@ module.exports = {
       if (!singleUser) {
         res.status(404).json({ message: "No user with this id!" });
       } else {
-        res.json(singleUser);
+        res.status(200).json(singleUser);
       }
     } catch (error) {
       res.status(500).json(error);
@@ -63,7 +63,7 @@ module.exports = {
         res.status(200).json(updatedUser);
       }
     } catch (error) {
-      res.status(500).json({ message: "Oops! Something went wrong!" });
+      res.status(500).json(error);
     }
   },
   //delete user by id
@@ -78,7 +78,7 @@ module.exports = {
         res.status(200).json(deletedUser);
       }
     } catch (error) {
-      res.status(500).json({ message: "Oops! Something went wrong!" });
+      res.status(500).json(error);
     }
   },
   //add friend to user?
@@ -95,7 +95,7 @@ module.exports = {
         res.status(200).json(newFriend);
       }
     } catch (error) {
-      res.status(500).json({ message: "Oops! Something went wrong!" });
+      res.status(500).json(error);
     }
   },
   //delete friend from user
@@ -112,7 +112,7 @@ module.exports = {
         res.status(200).json(deletedFriend)
       }
     } catch (error) {
-        res.status(500).json({message: 'Oops! Something went wrong!'})
+        res.status(500).json(error)
     }
   },
 };
