@@ -1,6 +1,6 @@
 const express = require('express');
 const db = require('./config/connection');
-const routes = require('./routes')
+const routes = require('./routes');
 
 
 const PORT = 3001
@@ -15,4 +15,4 @@ db.once('open', () => {
     app.listen(PORT, () => {
         console.log(`Now listening at ${PORT}`)
     })
-})
+});
