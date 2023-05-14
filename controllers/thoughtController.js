@@ -63,7 +63,7 @@ module.exports = {
             const updatedThought= await Thought.findOneAndUpdate(
                 {_id: req.params.thoughtId},
                 {$set: req.body},
-                {new: true}
+                {runValidators: true, new: true}
             );
             if(!updatedThought) {
                 res.status(404).json({message: 'No thought with this id!'})
@@ -81,10 +81,19 @@ module.exports = {
             _id: req.params.thoughtId,
           });
           if (!deletedThought) {
-            res.status(404).json({ message: "No thought with this id!" });
-          } else {
-            res.status(200).json(deletedThought);
+            return res.status(404).json({ message: "No thought with this id!" });
           }
+          const user = await User.findOneAndUpdate(
+            {thoughts: req.body.thoughtId},
+            {$pull: {thoughts: req.body.thoughtId}},
+            {new: true}
+          )
+          if(!user) {
+            res.status(404).json({message: 'No user with this id'})
+          } else {
+            res.status(200).json({message: 'Thought deleted!'})
+          }
+          
         } catch (error) {
           res.status(500).json(error);
         }

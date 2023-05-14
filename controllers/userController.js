@@ -12,7 +12,7 @@
 //done?
 //TODO: delete to remove a friend from a user's friend list
 //done?
-const { User} = require("../models");
+const { User, Thought} = require("../models");
 
 module.exports = {
   //get all users
@@ -66,17 +66,24 @@ module.exports = {
       res.status(500).json(error);
     }
   },
-  //delete user by id
+  //delete user by id and thoughts
   async deleteUser(req, res) {
     try {
       const deletedUser = await User.findOneAndRemove({
         _id: req.params.userId,
       });
       if (!deletedUser) {
-        res.status(404).json({ message: "No user with this id!" });
+        return res.status(404).json({ message: "No user with this id!" });
+      } 
+      const thoughts = await Thought.deleteMany({
+        username: deletedUser.username
+      })
+      if(!thoughts) {
+        res.status(404).json({message: 'No thoughts found'})
       } else {
-        res.status(200).json(deletedUser);
+        res.status(200).json({message: 'Successfully deleted'})
       }
+
     } catch (error) {
       res.status(500).json(error);
     }
