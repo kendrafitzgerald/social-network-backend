@@ -18,7 +18,7 @@ module.exports = {
   //get all users
   async getAllUsers(req, res) {
     try {
-      const users = await User.find();
+      const users = await User.find({});
       res.status(200).json(users);
     } catch (error) {
       res.status(500).json(error);
@@ -86,7 +86,7 @@ module.exports = {
     try {
       const newFriend = await User.findOneAndUpdate(
         { _id: req.params.userId },
-        { $addToSet: { friends: req.body } },
+        { $addToSet: { friends: req.params.friendsId } },
         { runValidators: true, new: true }
       );
       if (!newFriend) {

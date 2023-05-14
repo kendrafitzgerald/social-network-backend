@@ -14,14 +14,13 @@
 
 
 const {Thought, User} = require('../models');
-const { updateUser } = require('./userController');
 
 
 module.exports = {
     //get all thoughts
     async getAllThoughts(req, res) {
         try {
-        const thoughts = await Thought.find();
+        const thoughts = await Thought.find({});
         res.status(200).json(thoughts)
         } catch (error) {
             res.status(500).json(error)
@@ -90,5 +89,37 @@ module.exports = {
           res.status(500).json(error);
         }
       },
+      async newReaction(req, res) {
+        try {
+            const newReaction = await Thought.findOneAndUpdate(
+                {_id: req.params.thoughtId},
+                {$addToSet: {reactions: req.body}},
+                {runValidators: true, new: true}
+            )
+            if(!newReaction) {
+                res.status(404).json({message: 'Oops! Something went wrong.'})
+            } else {
+                res.status(200).json(newReaction)
+            }
+        } catch (error) {
+            res.status(500).json(error)
+        }
+      },
+      async deleteReaction(req, res) {
+        try {
+            const deleteReaction = await Thought.findOneAndUpdate(
+                {_id: req.params.thoughtId},
+                {$pull: {reactions: {reactionId: req.params.reactionId}}},
+                {runValidators: true, new: true}
+            );
+            if(!deleteReaction) {
+                res.status(404).json({message: 'Oops! Something went wrong'})
+            } else {
+                res.status(200).json(deleteReaction)
+            }
+        } catch (error) {
+            res.status(500).json(error)
+        }
+      }
      
-}
+};
