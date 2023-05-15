@@ -29,7 +29,7 @@ module.exports = {
   async getOneUser(req, res) {
     try {
       const singleUser = await User.findOne({ _id: req.params.userId })
-        .select("- __v")
+        .select("-__v")
         .populate("thoughts")
         .populate("friends");
       if (!singleUser) {
