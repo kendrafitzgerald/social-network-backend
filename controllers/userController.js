@@ -13,6 +13,7 @@
 //TODO: delete to remove a friend from a user's friend list
 //done?
 const { User, Thought} = require("../models");
+const {Types} = require('mongoose');
 
 module.exports = {
   //get all users
@@ -28,7 +29,7 @@ module.exports = {
   async getOneUser(req, res) {
     try {
       const singleUser = await User.findOne({ _id: req.params.userId })
-        .select("- _v")
+        .select("- __v")
         .populate("thoughts")
         .populate("friends");
       if (!singleUser) {
@@ -37,6 +38,7 @@ module.exports = {
         res.status(200).json(singleUser);
       }
     } catch (error) {
+      console.log(error)
       res.status(500).json(error);
     }
   },
@@ -91,9 +93,10 @@ module.exports = {
   //add friend to user?
   async addFriend(req, res) {
     try {
+      const friend = Types.ObjectId(req.params.friendId)
       const newFriend = await User.findOneAndUpdate(
         { _id: req.params.userId },
-        { $addToSet: { friends: req.params.friendsId } },
+        { $addToSet: { friends: friend } },
         { runValidators: true, new: true }
       );
       if (!newFriend) {
@@ -108,9 +111,10 @@ module.exports = {
   //delete friend from user
   async deleteFriend(req, res) {
     try {
+      const friend = Types.ObjectId(req.params.friendId)
       const deletedFriend = await User.findOneAndUpdate(
         { _id: req.params.userId },
-        { $pull: { friends: { friendsId: req.params.friendsId } } },
+        { $pull: { friends: friend } },
         { runValidators: true, new: true }
       );
       if(!deletedFriend) {
