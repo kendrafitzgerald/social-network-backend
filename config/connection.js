@@ -1,3 +1,4 @@
+//connect to mongoose
 const { connect, connection, set} = require('mongoose');
 set("strictQuery", false)
 

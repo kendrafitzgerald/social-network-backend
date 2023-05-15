@@ -1,6 +1,6 @@
 const {Schema, model} = require('mongoose');
 const Reaction = require('./Reaction')
-
+//thought schema
 const thoughtSchema = new Schema(
     {
         thoughtText: {
@@ -30,10 +30,10 @@ const thoughtSchema = new Schema(
         id: false,
     },
 );
-
+//adds length of reaction count to thought schema
 thoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length
 });
-
+//creates thought model from thought schema
 const Thought = model('thought', thoughtSchema);
 module.exports = Thought;

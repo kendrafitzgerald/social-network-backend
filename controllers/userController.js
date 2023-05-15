@@ -1,17 +1,4 @@
-//TODO: get all users
-//done
-//TODO: get a single user by id with its populated thoughts and friend data
-//done
-//TODO: Post/create a new user
-//done?
-//TODO: put/update user by id
-//done
-//TODO: delete a user by its id
-//done
-//TODO: add a new friend to user's friend list
-//done?
-//TODO: delete to remove a friend from a user's friend list
-//done?
+//require user and thought models and mongoose Types Object
 const { User, Thought} = require("../models");
 const {Types} = require('mongoose');
 
@@ -90,7 +77,7 @@ module.exports = {
       res.status(500).json(error);
     }
   },
-  //add friend to user?
+  //add friend to user
   async addFriend(req, res) {
     try {
       const friend = Types.ObjectId(req.params.friendId)

@@ -1,17 +1,4 @@
-//TODO: get all thoughts
-//done
-//TODO: get single thought by id
-//done
-//TODO: create a new thought, push _id to associate user's thought array
-//done
-//TODO: update a thought by id
-//done
-//TODO: delete a thought by id
-//done
-//TODO: create a reaction and store in a single thought's reactions array field
-//TODO: delete and remove a reaction by reactionId value
-
-
+//require thought and user models
 
 const {Thought, User} = require('../models');
 
@@ -98,6 +85,7 @@ module.exports = {
           res.status(500).json(error);
         }
       },
+      //create a new reaction
       async newReaction(req, res) {
         try {
             const newReaction = await Thought.findOneAndUpdate(
@@ -114,6 +102,7 @@ module.exports = {
             res.status(500).json(error)
         }
       },
+      //delete a reaction
       async deleteReaction(req, res) {
         try {
             const deleteReaction = await Thought.findOneAndUpdate(
