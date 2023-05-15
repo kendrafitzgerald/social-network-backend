@@ -53,7 +53,7 @@ module.exports = {
   async updateUser(req, res) {
     try {
       const updatedUser = await User.findOneAndUpdate(
-        { _id: req.params.userId },
+        { _id: req.body.userId },
         { $set: req.body },
         { new: true }
       );
@@ -70,7 +70,7 @@ module.exports = {
   async deleteUser(req, res) {
     try {
       const deletedUser = await User.findOneAndRemove({
-        _id: req.params.userId,
+        _id: req.body.userId,
       });
       if (!deletedUser) {
         return res.status(404).json({ message: "No user with this id!" });

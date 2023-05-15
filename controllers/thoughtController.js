@@ -61,7 +61,7 @@ module.exports = {
     async updateThought(req, res) {
         try {
             const updatedThought= await Thought.findOneAndUpdate(
-                {_id: req.params.thoughtId},
+                {_id: req.body.thoughtId},
                 {$set: req.body},
                 {runValidators: true, new: true}
             );
@@ -78,7 +78,7 @@ module.exports = {
     async deleteThought(req, res) {
         try {
           const deletedThought = await Thought.findOneAndRemove({
-            _id: req.params.thoughtId,
+            _id: req.body.thoughtId,
           });
           if (!deletedThought) {
             return res.status(404).json({ message: "No thought with this id!" });
