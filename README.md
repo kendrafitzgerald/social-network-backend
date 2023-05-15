@@ -9,11 +9,7 @@ I was motivated to design a backend to a social networking application that allo
 To install this project, clone the repo into your local machine. Once cloned, run ```npm install``` in your terminal to install all of the dependencies necessary for the project to run. Finally, run ```node server.js``` in your terminal to run your server. Navigate to an application, such as Insomnia, that allows you to view API routes in order to see the routes in action!
 
 ## Usage
-Open the server.js file in your terminal run ```node server.js```. Then, navigate to your API routing environment such as Insomnia. Begin testing the various routes in your environment utilizing the URL http://localhost:3001/api/. Make sure to input the correct URL params after the ```api/``` portion of the URL depending on the route you are trying to test. To see this in action, please view the walkthrough video linked here. 
-
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+Open the server.js file in your terminal run ```node server.js```. Then, navigate to your API routing environment such as Insomnia. Begin testing the various routes in your environment utilizing the URL http://localhost:3001/api/. Make sure to input the correct URL params after the ```api/``` portion of the URL depending on the route you are trying to test. To see this in action, please view the following [WalkThrough Video](https://drive.google.com/file/d/1NXM6MDB3p2jTS2yfKGxPVTdqVzz_mHiv/view).
 
 ## Credits
 
